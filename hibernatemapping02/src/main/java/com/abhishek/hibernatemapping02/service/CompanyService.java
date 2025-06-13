@@ -29,6 +29,14 @@ public class CompanyService {
         return companyRepository.findAll();
     }
 
-    public
+    public Company updateCompanyDetails( Long id, Company updated)
+    {
+        Company company = companyRepository.findById(id).orElseThrow(()-> new RuntimeException("Company not found with "+ id));
+        company.setName(updated.getName());
+        company.setIndustry(updated.getIndustry());
+        company.setLocation(updated.getLocation());
+        company.setFoundedDate(updated.getFoundedDate());
+        return companyRepository.save(company);
+    }
 
 }

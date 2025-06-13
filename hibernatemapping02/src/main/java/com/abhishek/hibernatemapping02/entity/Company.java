@@ -9,8 +9,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Entity
 @Table(name = "company")
