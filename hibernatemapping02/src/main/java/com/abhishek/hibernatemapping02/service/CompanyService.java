@@ -15,6 +15,7 @@ import java.util.Optional;
 public class CompanyService {
     @Autowired
     private CompanyRepository companyRepository;
+    @Autowired
     private EmployeesRepository employeesRepository;
 
     public Company addCompany(Company company)
@@ -22,9 +23,9 @@ public class CompanyService {
         return companyRepository.save(company);
     }
 
-    public Optional<Company> getCompanyById( Long id)
+    public Company getCompanyById( Long id)
     {
-        return companyRepository.findById(id);
+        return companyRepository.findById(id).orElseThrow(()->new RuntimeException("Company not found with "+ id));
     }
 
     public List<Company> getCompany()
@@ -49,13 +50,13 @@ public class CompanyService {
 
     public List<Employees> getEmployeesByCompanyId(Long id)
     {
-        Company company=getCompanyById(id).orElseThrow(()-> new RuntimeException("Company not found with " + " id"));
+        Company company=getCompanyById(id);
         return company.getEmployees();
     }
 
     public Employees addEmployeeByCompany(Long id, Employees employees)
     {
-        Company company=getCompanyById(id).orElseThrow(()->new RuntimeException("Company not found with " + " id"));
+        Company company=getCompanyById(id);
         employees.setCompany(company);
         return employeesRepository.save(employees);
     }

@@ -14,9 +14,8 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "employees")
 public class Employees {
-
     @Id
-    @GeneratedValue(generator = "GenerationType.IDENTITY")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String position;
